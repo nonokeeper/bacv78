@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Lieu;
+use App\Entity\LienDoodle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Lieu|null find($id, $lockMode = null, $lockVersion = null)
- * @method Lieu|null findOneBy(array $criteria, array $orderBy = null)
- * @method Lieu[]    findAll()
- * @method Lieu[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LienDoodle|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LienDoodle|null findOneBy(array $criteria, array $orderBy = null)
+ * @method LienDoodle[]    findAll()
+ * @method LienDoodle[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LieuRepository extends ServiceEntityRepository
+class LienDoodleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Lieu::class);
+        parent::__construct($registry, LienDoodle::class);
     }
 
     // /**
-    //  * @return Lieu[] Returns an array of Lieu objects
+    //  * @return LienDoodle[] Returns an array of LienDoodle objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LieuRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Lieu
+    public function findOneBySomeField($value): ?LienDoodle
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
