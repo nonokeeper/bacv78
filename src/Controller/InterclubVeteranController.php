@@ -13,7 +13,7 @@ use App\Entity\InterclubVeteran;
 use App\Repository\TeamVeteranRepository;
 use App\Repository\LieuRepository;
 use App\Entity\Lieu;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class InterclubVeteranController extends AbstractController

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Modifier une rencontre' %}
+
+{% block body %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+<div class="container mt-4">
+    <a class="btn btn-primary" href="{{ path('interclub.index')}}"><i class="fas fa-list-alt">&nbsp;</i>Retour Liste</a>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a class="btn btn-info" href="{{ path('compo', {'interclubId': interclub.id})}}"><i class="fas fa-users">&nbsp;</i>Faire la composition</a>
+    <a class="btn btn-info" href="{{ path('myinterclubs_edit', {'interclubId': interclub.id})}}"><i class="fas fa-box-open">&nbsp;</i>Gérer les présences</a>
+    {% endif %}
+</div>
+<div class="container mt-4">
+    <h3>Rencontre <small class="text-muted">`{{ interclub.name }}`</small></h3>
+    {{ form_start(interclubForm) }}
+    <div class="row">
+        <div class="col-md-4">{{ form_row(interclubForm.name) }}</div>
+        <div class="col-sm-7">{{ form_row(interclubForm.dateRencontre) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5 col-sm-6 col-md-4">{{ form_row(interclubForm.teamhome, {
+                attr: {
+                    'data-specific-teamhome-url': path('interclub_teamhome_select'),
+                    'class': 'js-interclub-form-teamhome'
+                }
+            }) }}
+        </div>
+        <div class="col-xs-5 col-sm-6 col-md-4">{{ form_row(interclubForm.teamext) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-6 js-specific-teamhome-target">
+            {%  if interclubForm.location is defined %}
+                {{ form_row(interclubForm.location) }}
+            {% endif %}
+        </div>
+        <div class="col-md-4 col-sm-4">{{ form_row(interclubForm.saison) }}</div>
+        <div class="col-md-2 col-sm-2">{{ form_row(interclubForm.score) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-auto">
+            {{ form_row(interclubForm.save) }}
+        </div>
+        <div class="col-md-auto">
+            {{ form_widget(interclubForm.saveAndQuit) }}
+        </div>
+{{ form_end(interclubForm) }}
+        <div class="col-md-auto">
+                {{ include('interclub/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div class="tab">&nbsp;</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin_interclub_form.js') }}"></script>
+{% endblock %}

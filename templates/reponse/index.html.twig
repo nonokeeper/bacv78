@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BACV - Résultats{% endblock %}
+
+{% block body %}
+{% for sondage in sondages %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ sondage.title }}</h5>
+            <p class="card-text">{{ sondage.description }}</p>
+            <a href="{{ path('reponse.view', {id: sondage.id}) }}" class="btn btn-primary">Voir les résultats</a>
+        </div>
+    </div>
+{% else %}
+    Pas encore de sondages disponibles
+{% endfor %}
+{% endblock %}

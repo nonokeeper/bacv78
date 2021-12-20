@@ -12,7 +12,7 @@ use App\Repository\TeamRepository;
 use App\Repository\ClubRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 class UserSearchType extends AbstractType

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -52,7 +54,10 @@ class SecurityController extends AbstractController
             $email = $request->request->get('email');
 
             $entityManager = $this->getDoctrine()->getManager();
-            $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
+            $registry = new ManagerRegistry();
+            //$userRepo = new UserRepository($registry);
+            $userRepo = $entityManager->getRepository(User::class)->get;
+            $user = $userRepo->findOneByEmail($email);
             /* @var $user User */
 
             if ($user === null) {
@@ -97,7 +102,7 @@ class SecurityController extends AbstractController
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
+            $user = $entityManager->getRepository(User::class)->get->findOneByResetToken($token);
             /* @var $user User */
 
             if ($user === null) {
