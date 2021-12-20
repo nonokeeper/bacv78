@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Accueil BACV' %}
+
+{% block body %}
+
+<div class="container container-fluid h-100">
+    <div class="row h-100">&nbsp;</div>
+    <div class="row h-100">
+        <main class="col">
+            {% if (actualite) %}
+            <div class="alert alert-danger" role="alert">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <i class="fas fa-info">&nbsp;&nbsp;</i>Actualité du jour :&nbsp;
+                    </div>
+                    <div class="col-md-9 marquee-rtl h25">
+                        <div>{{ actualite.content }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% for article in articles %}
+            <div class="card">
+                <div class="card-header blog">
+                    {{ article.title }}
+                </div>
+                <div class="card-body">
+                    {{ article.content|raw }}
+                    <div class="row">
+                    {% if (article.imageFilename) %}
+                        <div class="col">
+                            <img src="{{ asset('uploads/images/' ~ article.imageFilename) }}" class="w315" />&nbsp;
+                        </div>
+                    {% endif %}
+                    {% if (article.image2Filename) %}
+                        <div class="col">
+                            <img src="{{ asset('uploads/images/' ~ article.image2Filename) }}" class="w315" />
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer blog">
+                    Publié le : {{ article.publicationDate|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y')|capitalize }} par : {{ article.auteur ? article.auteur.firstName : "Webmaster" }}
+                </div>
+            </div>
+            <div class="tab">&nbsp;</div>
+            {% endfor %}
+        </main>
+        <aside class="col-12 col-md-3 p-2">
+            <a class="btn btn-outline btn-outline-primary" href="{{ path('event_calendar') }}"><i class="fas fa-calendar-alt">&nbsp;</i>Calendrier du Club</a>
+            <nav class="navbar navbar-expand navbar-dark bg-white flex-md-column flex-row align-items-start">
+                <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+                    <li class="nav-item text-left">                     
+                        <h5>Prochains Interclubs<br/></h5>
+                        <div class="row">
+                            <div class="col-md-2" id="cercle">1</div>
+                            {% if (match1) %}
+                                <div class="col interclub"><span>{{ match1.dateRencontre|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y')|capitalize }}</span></div>
+                            {% else %}
+                                <div class="col interclub"><span>Saison terminée !</span></div>
+                            {% endif %}
+                        </div>
+                        {% if (match1) %}
+                        <div class="row">
+                            <div class="col petit">{{ match1.name }}</div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-2" id="cercle">2</div>
+                            {% if (match2) %}
+                                <div class="col interclub"><span>{{ match2.dateRencontre|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y')|capitalize }}</span></div>
+                            {% else %}
+                                <div class="col interclub"><span>Saison terminée !</span></div>
+                            {% endif %}
+                        </div>
+                        {% if (match2) %}
+                        <div class="row">
+                            <div class="col petit">{{ match2.name }}</div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-2" id="cercle">3</div>
+                            {% if (match3) %}
+                                <div class="col interclub"><span>{{ match3.dateRencontre|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y')|capitalize }}</span></div>
+                            {% else %}
+                                <div class="col interclub"><span>Saison terminée !</span></div>
+                            {% endif %}
+                        </div>
+                        {% if (match3) %}
+                        <div class="row">
+                            <div class="col petit">{{ match3.name }}</div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-2" id="cercle">4</div>
+                            {% if (match4) %}
+                                <div class="col interclub"><span>{{ match4.dateRencontre|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y')|capitalize }}</span></div>
+                            {% else %}
+                                <div class="col interclub"><span>Saison terminée !</span></div>
+                            {% endif %}
+                        </div>
+                        {% if (match4) %}
+                        <div class="row">
+                            <div class="col petit interclub">{{ match4.name }}</div>
+                        </div>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <a target="_blank" class="btn btn-outline btn-outline-primary" href="https://icmanager.ffbad.org/index.php?Page=championnat&Action=view&ID_Championnat=4915"><i class="fas fa-balance-scale-right">&nbsp;</i>IC Manager</a>
+        </aside>
+    </div>
+</div>
+
+{% endblock %}
+

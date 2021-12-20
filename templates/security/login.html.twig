@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    {% if app.user %}
+        <div class="flash-notice">
+            Bonjour {{ app.user.username }}, tu es déjà connecté
+        </div>
+    {% else %}
+        <br>
+        <div class="container login">
+            <div class="bg-login rounded form-signin-heading">
+                <form action="" method="post" name="Login_Form" class="form-signin">       
+                    <div class="text-login"><i class="fas fa-user-lock"></i></div>
+                    <div class="login">
+                        <input type="text" value="{{ last_username }}" class="form-control" name="username" placeholder="Utilisateur" required="" autofocus="" />
+                        <input type="password" class="form-control" name="password" placeholder="Mot de passe" required=""/>     		  
+                        <input class="form-control" type="hidden" name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}">
+                        <section id="password">
+                        <a href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
+                        </section>
+                    </div>
+                    <button class="btn btn-lg btn-info"  name="Submit" value="Login" type="Submit">Entrer</button>  			
+                </form>			
+            </div>
+            <br>
+        </div>
+    {% endif %}
+
+{% endblock %}

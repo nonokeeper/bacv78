@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trophee Jeunes{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="tab">&nbsp;</div>
+    <div class="card">
+        <div class="card-header"><h5 class="card-title">Liste des Compétitions Jeunes de la saison en cours</h5></div>
+        <div class="card-body">
+            Les Doubles sont en bleu foncé<br/>
+            Chaque catégorie a sa couleur<br/>
+            (Mise à jour le 05/10/2021)
+        </div>
+    </div>
+    <div class="tab">&nbsp;</div>
+    <table class="table">
+        <thead class="bg-green">
+            <tr>
+                <th>Compétitions</th>
+                <th>Dates</th>
+                <th>Plaquette</th>
+                <th>Clubs</th>
+                <th>Dates limites d'insciption</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-danger">
+                <td>D1/J2</td>
+                <td>4 et 5 décembre 2021</td>
+                <td></td>
+                <td>Carrières-sur-Seine</td>
+                <td></td>
+            </tr>
+            <tr class="table-warning">
+                <td>D3/J3</td>
+                <td>11 et 12 décembre 2021</td>
+                <td></td>
+                <td>Villepreux</td>
+                <td></td>
+            </tr>
+            <tr class="table-info">
+                <td>D1/J3 et D2/J3</td>
+                <td>22 et 23 janvier 2021</td>
+                <td></td>
+                <td>Carrières-sur-Seine</td>
+                <td></td>
+            </tr>
+            <tr class="table-warning">
+                <td>D3/J3</td>
+                <td>12 et 13 février 2022</td>
+                <td></td>
+                <td>Elancourt</td>
+                <td></td>
+            </tr>
+            <tr class="bg-blue">
+                <td>Doubles 1</td>
+                <td>19 et 20 mars 2022</td>
+                <td></td>
+                <td>Sartrouville</td>
+                <td></td>
+            </tr>
+            <tr class="table-warning">
+                <td>D3/J2</td>
+                <td>12-13 décembre 2020</td>
+                <td></td>
+                <td>Chambourcy</td>
+                <td></td>
+            </tr>
+            <tr class="table-info">
+                <td>D2/J4</td>
+                <td>26 et 27 mars 2022</td>
+                <td></td>
+                <td>La-Queue-Lez-Yvelines</td>
+                <td></td>
+            </tr>
+            <tr class="table-warning">
+                <td>D3/J4</td>
+                <td>9 et 10 avril 2022</td>
+                <td></td>
+                <td>Rambouillet</td>
+                <td></td>
+            </tr>
+            <tr class="bg-blue">
+                <td>Doubles 2</td>
+                <td>14 et 15 mai 2022</td>
+                <td></td>
+                <td>A définir</td>
+                <td></td>
+            </tr>
+            <tr class="table-success">
+                <td>Championnat Jeunes</td>
+                <td>18 et 19 juin 2022</td>
+                <td></td>
+                <td>Maurecourt/Andresy</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

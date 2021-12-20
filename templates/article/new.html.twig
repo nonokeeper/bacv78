@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Créer un article' %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <a class="btn btn-primary" href="{{ path('article.index') }}"><i class="fas fa-clipboard-list">&nbsp;</i>Retour liste des articles</a>
+    <div class="tab">&nbsp;</div>
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h3>Nouvel Article</h3>
+    {{ form_errors(form) }}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-3">{{ form_row(form.title) }}</div>
+        <div class="col-md-6">{{ form_row(form.excerpt) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">{{ form_row(form.content) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">{{ form_row(form.categories) }}</div>
+        <div class="col-md-3">
+            {{ form_widget(form.Image, { 'attr': {'placeholder': 'Choisir Image N°1'} }) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_widget(form.Image2, { 'attr': {'placeholder': 'Choisir Image N°2'} }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">{{ form_row(form.isPublished) }}</div>
+        <div class="col-md-3 showRecipients">{{ form_row(form.notif) }}</div>
+        <div id="recipients" class="col-md-3 d-none">{{ form_row(form.recipients) }}</div>
+    </div>
+    <!-- Par défaut Création Article sans modal de confirmation de la notif Email -->
+    <button id="email" type="button" class="btn btn-success d-none" data-toggle="modal" data-target="#email-confirm">
+        <i class="fas fa-plus-circle">&nbsp;</i>{{ button_label|default('Créer') }}
+    </button>
+    <!-- Bouton Création article sans notif Email -->
+    <button id="noemail" class="btn btn-success"><i class="fas fa-plus-circle">&nbsp;</i>{{ button_label|default('Créer') }}</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="email-confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Confirmation d'envoi des Emails</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Attention, un email va être envoyé à tous ces destinataires
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary confirmation">Envoyer</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    {{ form_end(form) }}
+    <div class="tab">&nbsp;</div>
+</div>
+{% endblock %}
