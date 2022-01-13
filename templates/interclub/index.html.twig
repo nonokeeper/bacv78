@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <th>Rencontre</th>
-                <th>Date</th>
+                <th>Date / Heure</th>
                 <th>Equipe domicile</th>
                 <th>Equipe extérieure</th>
                 <th>Score</th>
@@ -44,7 +44,7 @@
     {% endif %}
     {% set var = '<tr>
         <td>' ~ link ~ '</td>
-        <td>' ~ interclub.dateRencontre|date("d/m/Y") ~ '</td>
+        <td>' ~ interclub.dateRencontre|date("d/m/Y H:i") ~ '</td>
         <td>' ~ interclub.teamhome ~ '</td>
         <td>' ~ interclub.teamext ~ '</td>
         <td>' ~ interclub.score ~ '</td>

@@ -54,7 +54,9 @@
                             <a class="dropdown-item" href="{{ path('presentation') }}"><i class="fas fa-handshake">&nbsp;</i>Présentation et règlement</a>
                             <a class="dropdown-item" href="{{ path('event_calendar') }}"><i class="fas fa-calendar-alt">&nbsp;</i>Calendrier du Club</a>
                             <a class="dropdown-item" href="{{ path('medias') }}"><i class="fas fa-photo-video">&nbsp;</i>Photos et Vidéos</a>
-                            <a class="dropdown-item" href="{{ path('user.inscription') }}"><i class="fas fa-address-book">&nbsp;</i>Saisie des Inscriptions</a>
+                            {% if level in ['A','B'] %}
+                                <a class="dropdown-item" href="{{ path('user.inscription') }}"><i class="fas fa-address-book">&nbsp;</i>Saisie des Inscriptions</a>
+                            {% endif %}
                         </div>
                     </li>
                     <li class="nav-item {% if app.request.attributes.get('_route') == 'tournoi.index' %}active{% endif %}">
