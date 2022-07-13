@@ -44,6 +44,7 @@ class UserMdpFormType extends AbstractType
         $resolver->setDefaults([
             //'data_class' => User::class,
             'empty_data' => User::class,
+            'csrf_protection' => false
         ]);
     }
 }

@@ -129,25 +129,26 @@ class ArticleController extends AbstractController
                 }
 
                 $message = (new \Swift_Message())
-                    ->setFrom(['arnaud.coste@bacv.fr' => 'Badminton Club de Villepreux'])
+                    ->setFrom(['arnaud.coste@bacv78.fr' => 'Badminton Club de Villepreux'])
                     ->setSubject($title);
+                $body = $content.'<br/><br/>Afin de recevoir nos informations, merci d\'ajouter cette adresse e-mail à vos contacts / à la liste des expéditeurs approuvés<br/>'.
+                    'Pour se désinscrire de ces communications, merci de répondre STOP en cliquant <a href="mailto:bacv78.villepreux@gmail.com" target="_blank">ICI</a><br>'.
+                    '<a class="text-green ml-2" href="https://www.bacv78.fr" target="_blank"><br/>Badminton Club de Villepreux</a>';
                 $nb = 0;
                 foreach ($users as $user) {
                     $subject = $user->getFirstName().', un nouvel article du BACV : \''.$title.'\'';
                     $message ->setSubject($subject);
-                    $body = $content.'<br/><br/>Afin de recevoir nos informations, merci d\'ajouter cette adresse e-mail à vos contacts / à la liste des expéditeurs approuvés<br/>'.
-                    'Pour se désinscrire de ces communications, merci de répondre STOP en cliquant <a href="mailto:bacv78.villepreux@gmail.com" target="_blank">ICI</a><br>'.
-                    '<a class="text-green ml-2" href="https://www.bacv78.fr" target="_blank">Badminton Club de Villepreux</a>';
                     $message->setBody($body, 'text/html');
                     $email = $user->getEmail();
                     $name = $user->getFirstName().' '.$user->getLastName();
                     if ($email) {
                         $message->addBcc($email, $name);
+                        // Send the message
+                        $mailer->send($message);
                         $nb ++;
                     }
                 }
-                // Send the message
-                $mailer->send($message);
+                
                 $this->addFlash('success',$nb.' Emails envoyés');
             }
 
