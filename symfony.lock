@@ -28,6 +28,9 @@
             "./config/packages/bm_backup_manager.yaml"
         ]
     },
+    "beberlei/doctrineextensions": {
+        "version": "v1.3.0"
+    },
     "behat/transliterator": {
         "version": "v1.3.0"
     },

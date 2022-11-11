@@ -142,7 +142,7 @@ class ArticleController extends AbstractController
                     $email = $user->getEmail();
                     $name = $user->getFirstName().' '.$user->getLastName();
                     if ($email) {
-                        $message->addBcc($email, $name);
+                        $message->setTo(array($email), $name);
                         // Send the message
                         $mailer->send($message);
                         $nb ++;

@@ -20,6 +20,19 @@
                 </div>
             </div>
             {% endif %}
+            {% if (usersBD) %}
+                    <div class="card">
+                        <div class="card-header blog">
+                            Anniversaires du Jour
+                        </div>
+                        <div class="card-body">
+                            {% for userBD in usersBD %}
+                                {{ userBD.firstName }} {{ userBD.lastName }}<br/>
+                            {% endfor %}
+                        </div>
+                    </div>
+            {% endif %}
+            Nb Articles = {{ articles|length }}
             {% for article in articles %}
             <div class="card">
                 <div class="card-header blog">

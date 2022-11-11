@@ -14,6 +14,12 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User[]    findAllActive()
+ * @method User[]    findInterclubsActive()
+ * @method User[]    findAdultesActive()
+ * @method User[]    findListeAttente()
+ * @method User|null findByName(string $value)
+ * @method User[]    findBirthday()
  */
 class UserRepository extends ServiceEntityRepository
 {
@@ -94,6 +100,28 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+    * @return User[] Returns users who has their birthday today
+    */
+    public function findBirthday()
+    {
+        // current month
+        $month = (new \DateTime())->format('m');
+        // current day
+        $day = (new \DateTime())->format('d');
+
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.active = :active')
+            ->andWhere('MONTH(u.birthDate) = :currentMonth')
+            ->andWhere('DAY(u.birthDate) = :currentDay')
+            ->setParameter('active', 1)
+            ->setParameter('currentMonth', $month)
+            ->setParameter('currentDay', $day)
+            ->getQuery()
+            ->getResult()
         ;
     }
 

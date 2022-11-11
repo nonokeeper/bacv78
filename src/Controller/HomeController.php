@@ -7,7 +7,9 @@ use App\Repository\ArticleRepository;
 use App\Repository\ActualiteRepository;
 use App\Repository\InterclubRepository;
 use App\Repository\InterclubVeteranRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 class HomeController extends AbstractController
 {
@@ -16,10 +18,19 @@ class HomeController extends AbstractController
         $this->registry = $registry;
     }
 
-    public function index(ArticleRepository $articleRepository, ActualiteRepository $actuRepository)
+    public function index(ArticleRepository $articleRepository, ActualiteRepository $actuRepository, UserRepository $userRepository, LoggerInterface $logger)
     {
         // Construction des articles du Blog à afficher en page d'accueil
         $articles = $articleRepository->findAllPublished();
+        // Construction de l'actualité du jour à afficher en page d'accueil
+        $actualite = $actuRepository->findLastOne();
+        // Construction des joueurs avec Anniversaire
+        $usersBirthday = $userRepository->findBirthday();
+
+        $logger->info('usersBirthday');
+        $logger->info(count($usersBirthday));
+        //$logger->info(count($usersBirthday));
+
         $match1 = '';
         $match2 = '';
         $match3 = '';
@@ -34,9 +45,6 @@ class HomeController extends AbstractController
         $match4 = $interclubRepository->findVIP4();
         $matchVet = $interclubVetRepository->findVet1();
         $matchVet2 = $interclubVetRepository->findVet2();
-
-        // Construction de l'actualité du jour à afficher en page d'accueil
-        $actualite = $actuRepository->findLastOne();
         
         return $this->render('index.html.twig', [
             'actualite' => $actualite,
@@ -46,7 +54,8 @@ class HomeController extends AbstractController
             'match3'    => $match3,
             'match4'    => $match4,
             'matchVet'  => $matchVet,
-            'matchVet2' => $matchVet2
+            'matchVet2' => $matchVet2,
+            'usersBD' => $usersBirthday
         ]);
     }
 }
